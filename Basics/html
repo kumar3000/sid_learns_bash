@@ -1,0 +1,63 @@
+#!/bin/bash
+# produces a html file template
+
+# here script
+# command << token
+# ...stdin...
+# token
+
+title="System Info: "
+RIGHT_NOW="$(date +"$x $r $Z")"
+TIME_STAMP="Updated on $RIGHT_NOW by $USER"
+
+##### Functions
+
+system_info() {
+  echo "<h2>System Release Info</h2>"
+  echo "<p>!TODO</p>"
+}
+
+show_uptime() {
+  echo "<h2>System Uptime</h2>"
+  echo "<pre>"
+  uptime
+  echo "</pre>"
+}
+
+drive_space() {
+  echo "<h2>Drive Space<h2>"
+  echo "<pre>"
+  df
+  echo "</pre>"
+}
+
+home_space() {
+  echo "<h2>Home Directory Space by User</h2>"
+  echo "<pre>"
+  echo "Bytes Directory"
+  du -s /home/* | sort -nr
+  echo "</pre>"
+}
+
+##### Main
+
+cat << _EOF_
+<html>
+<head>
+  <title>
+  $title $HOSTNAME
+  </title>
+</head>
+
+<body>
+  <h1>$title $HOSTNAME</h1>
+  <p>$TIME_STAMP</p>
+  $(system_info)
+  $(show_uptime)
+  $(drive_space)
+  $(home_space)
+</body>
+</html>
+_EOF_
+
+# $() tell the shell "substitute the results of the enclosed command", known as command substitution
