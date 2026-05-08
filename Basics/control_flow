@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -f .bash_profile ]; then
+  echo "You have a .bash_profile, things are just fine!"
+else
+  echo "uh oh..."
+fi
